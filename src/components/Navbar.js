@@ -14,8 +14,14 @@ const Navbar = () => {
   const seconds = useSelector((state) => state.navbar.seconds);
   const timeLoaded = useSelector((state) => state.navbar.timeLoaded);
   const location = useLocation();
+
   const pathArr = location.pathname.split('/');
   console.log('pathArr:', pathArr);
+  let dataName = '';
+  if (pathArr[1] === 'search')
+    dataName = 'Train Data will be updated in ' + seconds + ' seconds';
+  else if (pathArr[1] === 'service')
+    dataName = 'Service Data will be updated in ' + seconds + ' seconds';
   useEffect(() => {
     if (location.pathname === '/') {
       dispatch(resetTime()); // Reset time when navigating to the home page
@@ -37,20 +43,19 @@ const Navbar = () => {
       <Toolbar>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-            Realtime Trains
+            Train Radar
           </Link>
         </Typography>
         {location.pathname !== '/' &&
           (pathArr[1] === 'search' || pathArr[1] === 'service') && (
             <Box>
-              <Typography variant="body1">
-                Data updates in {seconds} seconds
-              </Typography>
+              <Typography variant="body1">{dataName}</Typography>
             </Box>
           )}
       </Toolbar>
     </AppBar>
   );
 };
-
+{
+}
 export default Navbar;

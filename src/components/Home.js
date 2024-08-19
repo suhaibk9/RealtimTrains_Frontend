@@ -45,8 +45,9 @@ const Home = () => {
                 margin: '0 auto',
               }}
             >
-              We are an independent provider of real-time information about
-              train services across the Great British rail network.
+              <strong>Train Radar</strong> provides real-time tracking of trains
+              across the UK, offering detailed journey information, status
+              updates, and route visualization on an interactive map.
             </Typography>
           </Box>
 
