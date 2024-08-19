@@ -5,6 +5,7 @@ import StationDetails from './components/StationDetails';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ServiceDetails from './components/ServiceDetails';
+import ErrorComponent from './customComponents/ErrorComponent';
 const App = () => {
   const appRouter = createBrowserRouter([
     {
@@ -29,6 +30,7 @@ const App = () => {
           element: <ServiceDetails />,
         },
       ],
+      errorElement: <ErrorComponent />,
     },
   ]);
   return <RouterProvider router={appRouter} />;

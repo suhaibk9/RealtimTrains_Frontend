@@ -14,7 +14,8 @@ const Navbar = () => {
   const seconds = useSelector((state) => state.navbar.seconds);
   const timeLoaded = useSelector((state) => state.navbar.timeLoaded);
   const location = useLocation();
-
+  const pathArr = location.pathname.split('/');
+  console.log('pathArr:', pathArr);
   useEffect(() => {
     if (location.pathname === '/') {
       dispatch(resetTime()); // Reset time when navigating to the home page
@@ -39,13 +40,14 @@ const Navbar = () => {
             Realtime Trains
           </Link>
         </Typography>
-        {location.pathname !== '/' && (
-          <Box>
-            <Typography variant="body1">
-              Data updates in {seconds} seconds
-            </Typography>
-          </Box>
-        )}
+        {location.pathname !== '/' &&
+          (pathArr[1] === 'search' || pathArr[1] === 'service') && (
+            <Box>
+              <Typography variant="body1">
+                Data updates in {seconds} seconds
+              </Typography>
+            </Box>
+          )}
       </Toolbar>
     </AppBar>
   );

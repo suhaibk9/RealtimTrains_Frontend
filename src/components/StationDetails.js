@@ -28,7 +28,6 @@ const StationDetails = () => {
   const trainData = useSelector((state) => state.station.trainData);
   const loading = useSelector((state) => state.station.loading);
   const stationName = useSelector((state) => state.station.stationName);
-  const firstLoad = useSelector((state) => state.station.firstRender);
   useEffect(() => {
     const station = stations.find((st) => st.crs === stationCode);
     const stationName = station ? station.name : 'Unknown Station';
