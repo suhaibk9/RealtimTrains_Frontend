@@ -9,6 +9,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import axios from 'axios';
+import TrainLoader from '../customComponents/TrainLoader';
 import 'leaflet/dist/leaflet.css';
 import {
   MapContainer,
@@ -289,7 +290,7 @@ const ServiceDetails = () => {
   };
 
   if (loading) {
-    return <Typography>Loading...</Typography>;
+    return <TrainLoader />;
   }
 
   if (error) {

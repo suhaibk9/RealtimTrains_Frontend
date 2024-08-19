@@ -1,22 +1,27 @@
-import React from "react";
+import React from 'react';
 
 const TrainLoader = ({ message }) => {
   return (
     <>
       <style>
         {`
-          html, body {
+          /* Ensure the loader covers the entire viewport */
+          .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            margin: 0;
+            background: linear-gradient(
+              to right,
+              rgba(86, 204, 242, 0.7), /* semi-transparent blue */
+              rgba(47, 128, 237, 0.7)  /* semi-transparent darker blue */
+            );
+            z-index: 10000; /* High z-index to overlay everything */
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
             flex-direction: column;
-          }
-
-          body {
-            background: linear-gradient(to right, #56ccf2, #2f80ed);
           }
 
           .train-container {
@@ -316,35 +321,37 @@ const TrainLoader = ({ message }) => {
           }
         `}
       </style>
-      <div className="train-container">
-        <div className="engine-head">
-          <div className="engine-window">
-            <div className="engine-body">
-              <div className="smoke-section">
-                <span></span>
+      <div className="loader-overlay">
+        <div className="train-container">
+          <div className="engine-head">
+            <div className="engine-window">
+              <div className="engine-body">
+                <div className="smoke-section">
+                  <span></span>
+                </div>
+              </div>
+            </div>
+            <div className="engine-base">
+              <div className="wheel-section">
+                <div className="large-wheel"></div>
+                <div className="small-wheel"></div>
               </div>
             </div>
           </div>
-          <div className="engine-base">
+          <div className="train-cabin">
+            <div className="cargo"></div>
             <div className="wheel-section">
-              <div className="large-wheel"></div>
+              <div className="small-wheel"></div>
               <div className="small-wheel"></div>
             </div>
           </div>
-        </div>
-        <div className="train-cabin">
-          <div className="cargo"></div>
-          <div className="wheel-section">
-            <div className="small-wheel"></div>
-            <div className="small-wheel"></div>
+          <div className="train-tracks">
+            <span></span>
+            <span></span>
           </div>
         </div>
-        <div className="train-tracks">
-          <span></span>
-          <span></span>
-        </div>
+        {message && <div className="loading-message">{message}</div>}
       </div>
-
     </>
   );
 };
