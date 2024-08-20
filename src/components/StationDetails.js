@@ -28,6 +28,7 @@ const StationDetails = () => {
   const trainData = useSelector((state) => state.station.trainData);
   const loading = useSelector((state) => state.station.loading);
   const stationName = useSelector((state) => state.station.stationName);
+  const firstLoad = useSelector((state) => state.station.firstRender);
   useEffect(() => {
     const station = stations.find((st) => st.crs === stationCode);
     const stationName = station ? station.name : 'Unknown Station';
@@ -36,13 +37,14 @@ const StationDetails = () => {
 
   const fetchTrainData = () => {
     if (stationCode) {
+      dispatch(setLoading(true));
       axios
         .get(`https://realtimtrains-backend.onrender.com/search/${stationCode}`)
         .then((response) => {
-          dispatch(setTimeLoaded(new Date()));
           dispatch(setTrainData(response.data.services));
           dispatch(setLoading(false));
           dispatch(setSelectedStation(null));
+          dispatch(setTimeLoaded(new Date()));
           dispatch(setTime(new Date().toISOString())); // Set the timer to 60 seconds
         })
         .catch((error) => {
@@ -54,13 +56,14 @@ const StationDetails = () => {
 
   const fetchTrainDataSuccessive = () => {
     if (stationCode) {
+      dispatch(setLoading(true));
       axios
         .get(`https://realtimtrains-backend.onrender.com/search/${stationCode}`)
         .then((response) => {
-          dispatch(setTimeLoaded(new Date()));
           dispatch(setTrainData(response.data.services));
           dispatch(setLoading(false));
           dispatch(setSelectedStation(null));
+          dispatch(setTimeLoaded(new Date()));
           dispatch(setTime(new Date().toISOString())); // Set the timer to 60 seconds
           toast.success('Trains Updated');
         })
@@ -73,6 +76,7 @@ const StationDetails = () => {
 
   useEffect(() => {
     fetchTrainData(); // Initial data fetch
+    if (firstLoad) dispatch(setFirstRender(false));
     const intervalId = setInterval(fetchTrainDataSuccessive, 60000); // Fetch data every minute
 
     return () => clearInterval(intervalId); // Cleanup interval on component unmount

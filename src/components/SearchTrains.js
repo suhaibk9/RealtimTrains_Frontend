@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setTimeLoading } from '../utils/navbarSlice';
 import {
   setSelectedStation,
   setInputValue,
@@ -34,6 +35,7 @@ const SearchTrains = () => {
   };
 
   const handleSearchClick = () => {
+    dispatch(setTimeLoading(true));
     if (selectedStation) {
       dispatch(setRecentlySelected(selectedStation));
       dispatch(setFirstRender(true));
@@ -42,6 +44,8 @@ const SearchTrains = () => {
   };
 
   const handleRecentStationClick = (station) => {
+    dispatch(setTimeLoading(true));
+    dispatch(setFirstRender(true));
     dispatch(setSelectedStation(station));
     navigate(`/search/${station.crs}`);
   };

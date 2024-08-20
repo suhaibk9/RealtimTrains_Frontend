@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const navbarSlice = createSlice({
   name: 'navbar_slice',
   initialState: {
+    timeLoading: false,
     timeLoaded: null,
     seconds: 60,
   },
@@ -23,9 +24,17 @@ const navbarSlice = createSlice({
     resetSeconds: (state) => {
       state.seconds = 60;
     },
+    setTimeLoading: (state, action) => {
+      state.timeLoading = action.payload;
+    },
   },
 });
 
-export const { setTime, updateSeconds, resetTime, resetSeconds } =
-  navbarSlice.actions;
+export const {
+  setTime,
+  updateSeconds,
+  resetTime,
+  resetSeconds,
+  setTimeLoading,
+} = navbarSlice.actions;
 export default navbarSlice.reducer;

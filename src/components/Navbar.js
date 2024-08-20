@@ -14,7 +14,9 @@ const Navbar = () => {
   const seconds = useSelector((state) => state.navbar.seconds);
   const timeLoaded = useSelector((state) => state.navbar.timeLoaded);
   const location = useLocation();
-
+  const loadingPhase = useSelector((state) => state.navbar.timeLoading);
+  const trainData = useSelector((state) => state.station.trainData);
+  const serviceData = useSelector((state) => state.details.serviceData);
   const pathArr = location.pathname.split('/');
   console.log('pathArr:', pathArr);
   let dataName = '';
@@ -47,7 +49,11 @@ const Navbar = () => {
           </Link>
         </Typography>
         {location.pathname !== '/' &&
-          (pathArr[1] === 'search' || pathArr[1] === 'service') && (
+          ((pathArr[1] === 'search' && trainData && trainData.length > 0) ||
+            (pathArr[1] === 'service' &&
+              serviceData &&
+              serviceData.locations &&
+              serviceData.locations.length > 0)) && (
             <Box>
               <Typography variant="body1">{dataName}</Typography>
             </Box>
@@ -56,6 +62,4 @@ const Navbar = () => {
     </AppBar>
   );
 };
-{
-}
 export default Navbar;
