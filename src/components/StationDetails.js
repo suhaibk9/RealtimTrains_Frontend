@@ -55,10 +55,12 @@ const StationDetails = () => {
   };
 
   const fetchTrainDataSuccessive = () => {
+    const renderBaseURL='https://realtimtrains-backend.onrender.com';
+    const azureBaseURL='https://realtime-train-backend-bremfdd7d3e0bxg4.uksouth-01.azurewebsites.net';
     if (stationCode) {
       dispatch(setLoading(true));
       axios
-        .get(`https://realtimtrains-backend.onrender.com/search/${stationCode}`)
+        .get(`${azureBaseURL}/search/${stationCode}`)
         .then((response) => {
           dispatch(setTrainData(response.data.services));
           dispatch(setLoading(false));
