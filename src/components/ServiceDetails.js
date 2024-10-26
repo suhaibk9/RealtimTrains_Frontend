@@ -52,7 +52,7 @@ const ServiceDetails = () => {
     const azureBaseURL='https://realtime-train-backend-bremfdd7d3e0bxg4.uksouth-01.azurewebsites.net';
     try {
       const response = await axios.get(
-        `${azureBaseURL}/service/${serviceUid}/${year}/${month}/${day}`
+        `${renderBaseURL}/service/${serviceUid}/${year}/${month}/${day}`
       );
       dispatch(setServiceData(response.data));
       dispatch(setTime(new Date().toISOString())); // Set the timer to 60 seconds
